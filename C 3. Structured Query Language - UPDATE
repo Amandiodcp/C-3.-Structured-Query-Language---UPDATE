@@ -1,0 +1,31 @@
+
+CREATE DATABASE CustomerDB;
+GO
+
+
+USE CustomerDB;
+GO
+
+
+CREATE TABLE Customers (
+    CustomerID INT IDENTITY(1,1) PRIMARY KEY,
+    Name NVARCHAR(50)
+);
+GO
+
+
+INSERT INTO Customers (Name)
+VALUES ('John SmithZ'),
+       ('Jane DoeZ');
+GO
+
+
+BEGIN TRANSACTION;
+
+
+UPDATE Customers
+SET Name = SUBSTRING(Name, 1, LEN(Name) - 1)
+WHERE RIGHT(Name, 1) = 'Z';
+
+COMMIT;
+GO
